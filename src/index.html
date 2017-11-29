@@ -9,10 +9,37 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <p>Looks like you got the webserver up and running! Good job! Now it is time to
-         start working.
-        </p>
+        <h1>Super Quiz</h1>
+
+        <div id="player">
+            <h2>Player name</h2>
+            <p>Welcome player! Pleace enter your name.</p>
+            <input type="name" placeholder="your name"/>
+            <button>Submit name</button>
+        </div>
+        <div id="playername">
+            
+        </div>
+
+
+
+
+        <h3>Att göra</h3>
+        <ul>
+            <li>Glöm inte att ändra localhost till 4000</li>
+            <li>användare ska kunna lägga till sitt namn</li>
+            <li>användare ska kunna svara på frågan från servern</li>
+            <li>svaret måste komma innom en viss tid</li>
+            <li>om svaret är rätt kommer nästa fråga</li>
+            <li>om svaret är fel eller kommer för sent är spelet slut</li>
+            <li>jag ansvarar för att presentera frågan, hanteringen av klientens logik och UI</li>
+            <li>UI ska vaara enkelt och vackert</li>
+            <li>spelaren har max 20 sekunder på sig att svara</li>
+            <li>NÄr spelet är över ska pelaren kunna starta igen</li>
+            <li>Om användaren svarar rätt på allt ska spelet hållar reda på spelarens tid ovh presentera en high score lista 5 st</li>
+            <li>high score ska sparas i webstorage</li>
+            <li>applikationens ska kunna hantera obegränsad mängd frågor och olika frågeformat</li>
+        </ul>
 
         <script src="build.js"></script>
     </body>
