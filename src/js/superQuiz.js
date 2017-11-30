@@ -15,7 +15,6 @@ function addUserName () {
   let myHeadline = document.createElement('h2')
   myHeadline.innerText = 'This is the player name'
   tag.appendChild(myHeadline)
-
   let button = document.querySelector('#player button')
   button.addEventListener('click', event => {
     let value = button.previousElementSibling.value
