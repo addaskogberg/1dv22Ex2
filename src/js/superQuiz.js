@@ -35,7 +35,16 @@ const request = async () => {
 }
 
 function answer () {
-
+  let button = document.querySelector('#answerQuestion button')
+  button.addEventListener('click', event => {
+    let value = button.previousElementSibling.value
+    if (value.length === 0) return
+    request({
+      url: 'http://vhost3.lnu.se:20080/answer/1',
+      method: 'POST',
+      json: document.getElementById('response')
+    })
+  })
 }
 
 module.exports = {
