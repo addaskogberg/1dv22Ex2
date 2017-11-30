@@ -28,59 +28,18 @@ function addUserName () {
     event.stopPropagation()
   })
 }
-/* function setValue () {
-  window.localStorage.setItem('value', document.getElementById('player').value)
-  document.getElementById('player').innerHTML = window.localStorage.getItem('value')
-} */
 
- /*  function displayQuestion () {
-    var url = 'http://vhost3.lnu.se:20080/question/1'
-    var question
-
-    window.fetch(url)
-    .then(function (response) {
-      return response.json()
-    })
-    .then(function (data) {
-      console.log(data)
-      question = data
-      setUpData()
-    })
-
-    function setUpData () {
-     // var headlineElement = document.querySelector('#headline')
-      // headline.textContent = animal.species
-
-      var textElement = document.querySelector('#image')
-      textElement.src = question.Url
-    }
-
-    function updateQuestionUrlData (newUrl) {
-      var copyOfQuestion = Object.assign({}, question)
-      copyOfQuestion.Url = newUrl
-
-      var headers = new Headers({
-        'Content-Type': 'application/json ; charset=utf-8'
-      })
-
-      var fetchData = {
-        method: 'PUT',
-        body: JSON.stringify(copyOfQuestion),
-        headers: headers
-      }
-
-      window.fetch(url, fetchData)
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (data) {
-        question = data
-        setUpData()
-      })
-    }
-  } */
+const request = async () => {
+  const response = await window.fetch('http://vhost3.lnu.se:20080/question/1')
+  const json = await response.json()
+  console.log(json)
+  let question = document.createElement('text')
+  question.innerText = json
+  document.querySelector('#displayQuestion').appendChild(question)
+}
 
 module.exports = {
   addUserName,
-  checkDom
+  checkDom,
+  request
 }
