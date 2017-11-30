@@ -20,11 +20,8 @@ function addUserName () {
   button.addEventListener('click', event => {
     let value = button.previousElementSibling.value
     if (value.length === 0) return
-    let myname = document.createElement('h2')
-    myname.innerText = value
     window.localStorage.setItem('value', value)
-    console.log('my webstorage value: ' + window.localStorage.getItem('value'))
-    document.querySelector('#playername').appendChild(myname)
+    document.getElementById('playername').innerHTML = window.localStorage.getItem('value')
     event.stopPropagation()
   })
 }
@@ -34,7 +31,7 @@ const request = async () => {
   const json = await response.json()
   console.log(json)
   let question = document.createElement('text')
-  question.innerText = json
+  question.innerText = JSON.stringify(json)
   document.querySelector('#displayQuestion').appendChild(question)
 }
 
