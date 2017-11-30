@@ -15,7 +15,10 @@
       let myname = document.createElement('h2')
       myname.innerText = value
       document.querySelector('#playername').appendChild(myname)
+      event.stopPropagation()
     })
+   // localStorage.nickname = myname
+    // document.getElementById('#playername').innerHTML = localStorage.myname
   }
 
   module.exports = {
