@@ -25,7 +25,7 @@ function addUserName () {
   })
 }
 
-const request = async () => {
+const request1 = async () => {
   const response = await window.fetch('http://vhost3.lnu.se:20080/question/1')
   const json = await response.json()
   console.log(json)
@@ -42,14 +42,15 @@ function answer () {
     request({
       url: 'http://vhost3.lnu.se:20080/answer/1',
       method: 'POST',
-      json: document.getElementById('response')
+      json: {answer: value}
     })
+    console.log(request.response)
   })
 }
 
 module.exports = {
   addUserName,
   checkDom,
-  request,
+  request1,
   answer
 }
