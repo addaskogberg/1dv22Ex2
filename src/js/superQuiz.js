@@ -34,8 +34,13 @@ const request = async () => {
   document.querySelector('#displayQuestion').appendChild(question)
 }
 
+function answer () {
+
+}
+
 module.exports = {
   addUserName,
   checkDom,
-  request
+  request,
+  answer
 }
