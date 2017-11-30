@@ -1,4 +1,6 @@
 const superQuiz = require('./superQuiz')
 
 superQuiz.addUserName()
-superQuiz.displayQuestion()
+superQuiz.checkDom()
+// superQuiz.setValue()
+// superQuiz.displayQuestion()
