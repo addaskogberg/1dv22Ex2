@@ -39,50 +39,24 @@ function answer () {
   button.addEventListener('click', event => {
     let value = button.previousElementSibling.value
     console.log(value)
+
     var data = JSON.stringify({
       'answer': value
     })
-    console.log(data)
+
     var xhr = new window.XMLHttpRequest()
-    xhr.withCredentials = true
 
     xhr.addEventListener('readystatechange', function () {
       if (this.readyState === 4) {
         console.log('responseText: ' + this.responseText)
-        console.log(xhr)
+        console.log('status: ' + this.status)
+        console.log('response: ' + this.response)
       }
     })
 
-    xhr.open('POST', 'http://vhost3.lnu.se:20080/answer/1')
-    xhr.setRequestHeader('Content-Type', 'application/json')
-    xhr.setRequestHeader('cache-control', 'no-cache')
-    // xhr.setRequestHeader('postman-token', 'b498db15-f77c-3639-f373-6920d69321d9')
-    xhr.setRequestHeader('Access-Control-Allow-Origin', '*')
-    console.log(xhr.headers)
+    xhr.open('POST', 'http://vhost3.lnu.se:20080/answer/1', true)
+    xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
     xhr.send(data)
-    console.log(data)
-
- /*  let button = document.querySelector('#answerQuestion button')
-  button.addEventListener('click', event => {
-    let req = new window.XMLHttpRequest()
-    req.addEventListener('load', function () {
-      console.log(req.responseText)
-    })
-    let value = 'button.previousElementSibling.value'
-   // let value = '#response'
-    console.log(value)
-    let request = {
-      url: 'http://vhost3.lnu.se:20080/answer/1',
-      method: 'POSTT',
-      json: {
-        'answer': value
-      }
-    }
-
-    req.open('POST', request)
-    req.send()
-    // req.load()
-  }) */
   })
 }
 
