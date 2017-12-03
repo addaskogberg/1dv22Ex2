@@ -22,6 +22,7 @@ function addUserName () {
     window.localStorage.setItem('value', value)
     document.getElementById('playername').innerHTML = window.localStorage.getItem('value')
     event.stopPropagation()
+    button.previousElementSibling.value = ''
   })
 }
 function question (nextURL) {
@@ -31,9 +32,15 @@ function question (nextURL) {
    // console.log(json)
     let question = document.getElementById('displayQuestion')
     question.innerText = JSON.stringify(json.question)
-    console.log(json.alternatives)
+    let alternative = document.getElementById('displayAlternative')
     // console.log(json.nextURL)
     nextAnswer = json.nextURL
+    if (json.alternatives !== undefined) {
+      // alternative.innerText = json.alternatives
+      for (var property in json.alternatives) {
+        alternative.innerText += property + ' = ' + json.alternatives[property] + '\n'
+      }
+    }
   }
   request1()
 }
@@ -42,7 +49,7 @@ function answer () {
   button.addEventListener('click', event => {
     let value = button.previousElementSibling.value
     console.log(value)
-
+    button.previousElementSibling.value = ''
     var data = JSON.stringify({
       'answer': value
     })
