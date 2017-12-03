@@ -25,6 +25,7 @@ function addUserName () {
     button.previousElementSibling.value = ''
   })
 }
+
 function question (nextURL) {
   const request1 = async () => {
     let response = await window.fetch(nextURL)
@@ -46,21 +47,15 @@ function question (nextURL) {
   }
   request1()
 }
-/* function timer () {
-
-} */
 function countDown () {
-  var countDownDate = new Date().getTime()
-  var x = setInterval(function () {
-    var now = new Date().getTime()
-    var distance = countDownDate + now
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000)
-    document.getElementById('demo').innerHTML = minutes + 'm' + seconds + 's '
-
-    if (distance < 0) {
-      clearInterval(x)
-      document.getElementById('demo').innerHTML = 'EXPIRED'
+  var i = 20
+  setInterval(function () {
+    if (i > 0) {
+      document.getElementById('demo').innerHTML = i + ' sekunder kvar'
+      i--
+    } else {
+      document.getElementById('demo').innerHTML = 'tiden är ute'
+      document.getElementById('answerButton').disabled = true
     }
   }, 1000)
 }
@@ -68,9 +63,9 @@ function countDown () {
 var minutesLabel = document.getElementById('minutes')
 var secondsLabel = document.getElementById('seconds')
 var totalSeconds = 0
-setInterval(totalTime, 1000)
+setInterval(setTime, 1000)
 
-function totalTime () {
+function setTime () {
   ++totalSeconds
   secondsLabel.innerHTML = pad(totalSeconds % 60)
   minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60))
@@ -88,6 +83,7 @@ function pad (val) {
 function answer () {
   let button = document.querySelector('#answerQuestion button')
   button.addEventListener('click', event => {
+    countDown()
     let value = button.previousElementSibling.value
     console.log(value)
     button.previousElementSibling.value = ''
@@ -103,14 +99,10 @@ function answer () {
         var response = JSON.parse(this.responseText)
         console.log(response.nextURL)
         if (response.nextURL === undefined) {
-          let confirmAnswer = window.confirm('game over, start again?')
-          if (confirmAnswer) {
-            document.location.reload()
-          } else {
-            return
-          }
+          gameOver()
+        } else {
+          question(response.nextURL)
         }
-        question(response.nextURL)
       }
     })
 
@@ -121,11 +113,17 @@ function answer () {
 }
 var nextAnswer = 'http://vhost3.lnu.se:20080/answer/1'
 
+async function gameOver () {
+  let confirmAnswer = await window.confirm('game over, start again?')
+  if (confirmAnswer) {
+    document.location.reload()
+  }
+}
 module.exports = {
   addUserName,
   checkDom,
   question,
   answer,
   countDown,
-  totalTime
+  setTime
 }
