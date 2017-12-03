@@ -10,6 +10,15 @@ function checkDom () {
   })
 }
 
+function startGame () {
+  let button = document.querySelector('#startGame')
+  button.addEventListener('click', event => {
+    question('http://vhost3.lnu.se:20080/question/1')
+    myTimer()
+    setInterval(setTime, 1000)
+  })
+}
+
 function addUserName () {
   let tag = document.querySelector('#player')
   let myHeadline = document.createElement('h2')
@@ -27,6 +36,7 @@ function addUserName () {
 }
 
 function question (nextURL) {
+  timer = 19
   const request1 = async () => {
     let response = await window.fetch(nextURL)
     let json = await response.json()
@@ -48,15 +58,18 @@ function question (nextURL) {
   request1()
 }
 
-function countDown () {
-  var i = 20
+var timer = 19
+function myTimer () {
   setInterval(function () {
-    if (i > 0) {
-      document.getElementById('demo').innerHTML = i + ' sekunder kvar'
-      i--
-    } else {
-      document.getElementById('demo').innerHTML = 'tiden är ute'
+    if (timer > 0) {
+      document.getElementById('demo').innerHTML = timer + ' sekunder kvar'
+      timer--
+    } else if (timer === 0) {
+      document.getElementById('demo').innerHTML = 'Tiden är ute'
       document.getElementById('answerButton').disabled = true
+      timer--
+    } else {
+      gameOver()
     }
   }, 1000)
 }
@@ -64,7 +77,6 @@ function countDown () {
 var minutesLabel = document.getElementById('minutes')
 var secondsLabel = document.getElementById('seconds')
 var totalSeconds = 0
-setInterval(setTime, 1000)
 
 function setTime () {
   ++totalSeconds
@@ -84,7 +96,6 @@ function pad (val) {
 function answer () {
   let button = document.querySelector('#answerQuestion button')
   button.addEventListener('click', event => {
-    countDown()
     let value = button.previousElementSibling.value
     console.log(value)
     button.previousElementSibling.value = ''
@@ -115,16 +126,15 @@ function answer () {
 var nextAnswer = 'http://vhost3.lnu.se:20080/answer/1'
 
 async function gameOver () {
-  let confirmAnswer = await window.confirm('game over, start again?')
-  if (confirmAnswer) {
-    document.location.reload()
-  }
+  await window.alert('game over')
+  document.location.reload()
 }
 module.exports = {
   addUserName,
   checkDom,
   question,
   answer,
-  countDown,
-  setTime
+  setTime,
+  myTimer,
+  startGame
 }
