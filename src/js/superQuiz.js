@@ -47,6 +47,7 @@ function question (nextURL) {
   }
   request1()
 }
+
 function countDown () {
   var i = 20
   setInterval(function () {
