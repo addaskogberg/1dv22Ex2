@@ -2,5 +2,5 @@ const superQuiz = require('./superQuiz')
 
 superQuiz.addUserName()
 superQuiz.checkDom()
-superQuiz.request1()
+superQuiz.question('http://vhost3.lnu.se:20080/question/1')
 superQuiz.answer()

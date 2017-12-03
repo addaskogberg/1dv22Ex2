@@ -24,16 +24,20 @@ function addUserName () {
     event.stopPropagation()
   })
 }
-
-const request1 = async () => {
-  const response = await window.fetch('http://vhost3.lnu.se:20080/question/1')
-  const json = await response.json()
-  console.log(json)
-  let question = document.createElement('text')
-  question.innerText = JSON.stringify(json.question)
-  document.querySelector('#displayQuestion').appendChild(question)
+function question (nextURL) {
+  const request1 = async () => {
+    let response = await window.fetch(nextURL)
+    let json = await response.json()
+    console.log(json)
+    let question = document.createElement('text')
+    question.innerText = JSON.stringify(json.question)
+    document.querySelector('#displayQuestion').appendChild(question)
+    console.log(json.alternatives)
+    console.log(json.nextURL)
+    nextAnswer = json.nextURL
+  }
+  request1()
 }
-
 function answer () {
   let button = document.querySelector('#answerQuestion button')
   button.addEventListener('click', event => {
@@ -49,20 +53,22 @@ function answer () {
     xhr.addEventListener('readystatechange', function () {
       if (this.readyState === 4) {
         console.log('responseText: ' + this.responseText)
-        console.log('status: ' + this.status)
-        console.log('response: ' + this.response)
+        var response = JSON.parse(this.responseText)
+        console.log(response.nextURL)
+        question(response.nextURL)
       }
     })
 
-    xhr.open('POST', 'http://vhost3.lnu.se:20080/answer/1', true)
+    xhr.open('POST', nextAnswer, true)
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8')
     xhr.send(data)
   })
 }
+var nextAnswer = 'http://vhost3.lnu.se:20080/answer/1'
 
 module.exports = {
   addUserName,
   checkDom,
-  request1,
+  question,
   answer
 }
