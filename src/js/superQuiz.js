@@ -28,12 +28,11 @@ function question (nextURL) {
   const request1 = async () => {
     let response = await window.fetch(nextURL)
     let json = await response.json()
-    console.log(json)
-    let question = document.createElement('text')
+   // console.log(json)
+    let question = document.getElementById('displayQuestion')
     question.innerText = JSON.stringify(json.question)
-    document.querySelector('#displayQuestion').appendChild(question)
     console.log(json.alternatives)
-    console.log(json.nextURL)
+    // console.log(json.nextURL)
     nextAnswer = json.nextURL
   }
   request1()
