@@ -36,14 +36,55 @@ function question (nextURL) {
     // console.log(json.nextURL)
     nextAnswer = json.nextURL
     if (json.alternatives !== undefined) {
-      // alternative.innerText = json.alternatives
+      alternative.innerText = ''
       for (var property in json.alternatives) {
         alternative.innerText += property + ' = ' + json.alternatives[property] + '\n'
       }
+    } else {
+      alternative.innerText = ''
     }
   }
   request1()
 }
+/* function timer () {
+
+} */
+function countDown () {
+  var countDownDate = new Date().getTime()
+  var x = setInterval(function () {
+    var now = new Date().getTime()
+    var distance = countDownDate + now
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000)
+    document.getElementById('demo').innerHTML = minutes + 'm' + seconds + 's '
+
+    if (distance < 0) {
+      clearInterval(x)
+      document.getElementById('demo').innerHTML = 'EXPIRED'
+    }
+  }, 1000)
+}
+
+var minutesLabel = document.getElementById('minutes')
+var secondsLabel = document.getElementById('seconds')
+var totalSeconds = 0
+setInterval(totalTime, 1000)
+
+function totalTime () {
+  ++totalSeconds
+  secondsLabel.innerHTML = pad(totalSeconds % 60)
+  minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60))
+}
+
+function pad (val) {
+  var valString = val + ''
+  if (valString.length < 2) {
+    return '0' + valString
+  } else {
+    return valString
+  }
+}
+
 function answer () {
   let button = document.querySelector('#answerQuestion button')
   button.addEventListener('click', event => {
@@ -61,6 +102,14 @@ function answer () {
         console.log('responseText: ' + this.responseText)
         var response = JSON.parse(this.responseText)
         console.log(response.nextURL)
+        if (response.nextURL === undefined) {
+          let confirmAnswer = window.confirm('game over, start again?')
+          if (confirmAnswer) {
+            document.location.reload()
+          } else {
+            return
+          }
+        }
         question(response.nextURL)
       }
     })
@@ -76,5 +125,7 @@ module.exports = {
   addUserName,
   checkDom,
   question,
-  answer
+  answer,
+  countDown,
+  totalTime
 }
