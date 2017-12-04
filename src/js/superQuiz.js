@@ -7,6 +7,8 @@ function checkDom () {
     } else {
       console.log('localStorage is null')
     }
+    setHighScore()
+    getHighScore()
   })
 }
 
@@ -129,6 +131,27 @@ async function gameOver () {
   await window.alert('game over')
   document.location.reload()
 }
+
+function setHighScore (time) {
+  var testObject = { 'one': 1, 'two': 2, 'three': 3 }
+  window.localStorage.setItem('highscore', JSON.stringify(testObject))
+  // window.localStorage.setItem('highscore', JSON.stringify(window.localStorage.getItem('lastname'), time))
+}
+
+function getHighScore () {
+  let highscore = window.localStorage.getItem('highscore')
+  let json = JSON.parse(highscore)
+  if (highscore !== null) {
+    console.log(highscore)
+    console.log(JSON.parse(highscore))
+    document.getElementById('highscore').innerHTML = ''
+    for (var property in json) {
+      console.log(property + ' : ' + json[property])
+      document.getElementById('highscore').innerHTML += property + ' (' + json[property] + ')<br>'
+    }
+  }
+}
+
 module.exports = {
   addUserName,
   checkDom,
@@ -136,5 +159,7 @@ module.exports = {
   answer,
   setTime,
   myTimer,
-  startGame
+  startGame,
+  setHighScore,
+  getHighScore
 }
