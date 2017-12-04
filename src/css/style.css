@@ -1,0 +1,26 @@
+body
+{
+  background-color: #b6afaf
+}
+
+#playername 
+{
+  background:#295c4b;
+  text-align: center;
+  font-size: 3em;
+  color:white;
+  width:200px;
+  height:50px;
+  padding:3px;
+  border:2px solid #03311c;
+  margin:10px 10px 50px 10px;
+  border-radius: 3px;
+}
+
+#startGame
+{
+width: 150px;
+height: 150px;
+font-size: 3em;
+border: 4px solid #03311c;
+}

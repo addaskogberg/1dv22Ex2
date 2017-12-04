@@ -15,7 +15,7 @@ function checkDom () {
 function startGame () {
   let button = document.querySelector('#startGame')
   button.addEventListener('click', event => {
-    question('http://vhost3.lnu.se:20080/question/1')
+    question('http://vhost3.lnu.se:20080/question/326')
     myTimer()
     setInterval(setTime, 1000)
   })
@@ -24,7 +24,7 @@ function startGame () {
 function addUserName () {
   let tag = document.querySelector('#player')
   let myHeadline = document.createElement('h2')
-  myHeadline.innerText = 'This is the player name'
+  myHeadline.innerText = 'The players name is:'
   tag.appendChild(myHeadline)
   let button = document.querySelector('#player button')
   button.addEventListener('click', event => {
@@ -79,11 +79,11 @@ function myTimer () {
 var minutesLabel = document.getElementById('minutes')
 var secondsLabel = document.getElementById('seconds')
 var totalSeconds = 0
-
 function setTime () {
   ++totalSeconds
   secondsLabel.innerHTML = pad(totalSeconds % 60)
   minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60))
+ // console.log(pad(totalSeconds % 60))
 }
 
 function pad (val) {
@@ -99,6 +99,7 @@ function answer () {
   let button = document.querySelector('#answerQuestion button')
   button.addEventListener('click', event => {
     let value = button.previousElementSibling.value
+    if (value.length === 0) return
     console.log(value)
     button.previousElementSibling.value = ''
     var data = JSON.stringify({
@@ -113,7 +114,7 @@ function answer () {
         var response = JSON.parse(this.responseText)
         console.log(response.nextURL)
         if (response.nextURL === undefined) {
-          gameOver()
+          gameWin()
         } else {
           question(response.nextURL)
         }
@@ -131,11 +132,54 @@ async function gameOver () {
   await window.alert('game over')
   document.location.reload()
 }
+async function gameWin () {
+  console.log(pad(pad(parseInt(totalSeconds / 60)) + totalSeconds % 60))
+  let timeGameWin = pad(pad(parseInt(totalSeconds / 60)) + totalSeconds % 60)
+  if (timeGameWin.length === 0) return
+  window.localStorage.setItem('valueTime', timeGameWin)
+  await window.alert('you win')
+  document.location.reload()
+}
 
 function setHighScore (time) {
-  var testObject = { 'one': 1, 'two': 2, 'three': 3 }
-  window.localStorage.setItem('highscore', JSON.stringify(testObject))
-  // window.localStorage.setItem('highscore', JSON.stringify(window.localStorage.getItem('lastname'), time))
+  let highscore = window.localStorage.getItem('highscore')
+  let json = JSON.parse(highscore)
+  let scores = []
+
+  let i = 1
+  let name = ''
+  for (var property in json) {
+    // console.log(json[property])
+    if (i % 2 === 0) {
+      scores.push([name, json[property]])
+    } else {
+      name = json[property]
+    }
+    i++
+  }
+  // console.log(scores)
+
+  var player = window.localStorage.getItem('value') // document.getElementById('playername').innerHTML =
+  var result = window.localStorage.getItem('valueTime')
+
+  scores.push([player, result])
+  console.log(scores)
+
+  for (let score in scores) {
+    console.log(scores[score])
+  }
+
+  var item = {'name': player, 'score': result}
+  window.localStorage.setItem('highscore', JSON.stringify(item))
+  /*
+  var score = []
+  score.push({name: player, time: result})
+  if (score['highscore'] !== undefined) {
+    score = JSON.parse(score['highscore'])
+  } else {
+    score = []
+  }
+  */
 }
 
 function getHighScore () {
@@ -143,12 +187,22 @@ function getHighScore () {
   let json = JSON.parse(highscore)
   if (highscore !== null) {
     console.log(highscore)
-    console.log(JSON.parse(highscore))
+    console.log(json)
     document.getElementById('highscore').innerHTML = ''
+
+    let highscorestring = ''
+    let i = 0
     for (var property in json) {
-      console.log(property + ' : ' + json[property])
-      document.getElementById('highscore').innerHTML += property + ' (' + json[property] + ')<br>'
+      console.log(json[property])
+      if (i % 2 === 0) {
+        highscorestring += json[property]
+      } else {
+        highscorestring += ' (' + json[property] + ')<br>'
+      }
+      i++
     }
+
+    document.getElementById('highscore').innerHTML += highscorestring
   }
 }
 
