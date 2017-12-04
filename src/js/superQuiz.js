@@ -7,17 +7,6 @@ function checkDom () {
     } else {
       console.log('localStorage is null')
     }
-    // setHighScore()
-    getHighScore()
-  })
-}
-
-function startGame () {
-  let button = document.querySelector('#startGame')
-  button.addEventListener('click', event => {
-    question('http://vhost3.lnu.se:20080/question/326')
-    myTimer()
-    setInterval(setTime, 1000)
   })
 }
 
@@ -34,6 +23,15 @@ function addUserName () {
     document.getElementById('playername').innerHTML = window.localStorage.getItem('value')
     event.stopPropagation()
     button.previousElementSibling.value = ''
+  })
+}
+
+function startGame () {
+  let button = document.querySelector('#startGame')
+  button.addEventListener('click', event => {
+    question('http://vhost3.lnu.se:20080/question/1')
+    myTimer()
+    setInterval(setTime, 1000)
   })
 }
 
@@ -110,9 +108,9 @@ function answer () {
 
     xhr.addEventListener('readystatechange', function () {
       if (this.readyState === 4) {
-        console.log('responseText: ' + this.responseText)
+       // console.log('responseText: ' + this.responseText)
         var response = JSON.parse(this.responseText)
-        console.log(response.nextURL)
+        // console.log(response.nextURL)
         if (response.nextURL === undefined) {
           gameWin()
         } else {
@@ -148,6 +146,7 @@ async function gameWin () {
 
 function setHighScore () {
   let highscore = window.localStorage.getItem('highscore')
+  console.log(highscore)
   var sorted = []
   if (highscore !== null) {
     let highscoreArray = highscore.split(',')
@@ -193,10 +192,6 @@ function getHighScore () {
       }
       i++
     }
-
-    sorted.sort(function (a, b) {
-      return a[1] - b[1]
-    })
   }
   document.getElementById('highscore').innerHTML = highscoreList
 }
