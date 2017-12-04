@@ -7,7 +7,7 @@ function checkDom () {
     } else {
       console.log('localStorage is null')
     }
-    setHighScore()
+    // setHighScore()
     getHighScore()
   })
 }
@@ -128,9 +128,12 @@ function answer () {
 }
 var nextAnswer = 'http://vhost3.lnu.se:20080/answer/1'
 
+var win = false
 async function gameOver () {
-  await window.alert('game over')
-  document.location.reload()
+  if (!win) {
+    await window.alert('game over')
+    document.location.reload()
+  }
 }
 async function gameWin () {
   console.log(pad(pad(parseInt(totalSeconds / 60)) + totalSeconds % 60))
@@ -138,72 +141,64 @@ async function gameWin () {
   if (timeGameWin.length === 0) return
   window.localStorage.setItem('valueTime', timeGameWin)
   await window.alert('you win')
+  setHighScore()
+  win = true
   document.location.reload()
 }
 
-function setHighScore (time) {
+function setHighScore () {
   let highscore = window.localStorage.getItem('highscore')
-  let json = JSON.parse(highscore)
-  let scores = []
-
-  let i = 1
-  let name = ''
-  for (var property in json) {
-    // console.log(json[property])
-    if (i % 2 === 0) {
-      scores.push([name, json[property]])
-    } else {
-      name = json[property]
+  var sorted = []
+  if (highscore !== null) {
+    let highscoreArray = highscore.split(',')
+    var name = ''
+    var i = 0
+    for (var item in highscoreArray) {
+      if (i % 2 === 0) {
+        name = highscoreArray[item]
+      } else {
+        sorted.push([name, highscoreArray[item]])
+      }
+      i++
     }
-    i++
   }
-  // console.log(scores)
-
-  var player = window.localStorage.getItem('value') // document.getElementById('playername').innerHTML =
+  var player = window.localStorage.getItem('value')
   var result = window.localStorage.getItem('valueTime')
+  sorted.push([player, result])
 
-  scores.push([player, result])
-  console.log(scores)
+  sorted.sort(function (a, b) {
+    return a[1] - b[1]
+  })
 
-  for (let score in scores) {
-    console.log(scores[score])
-  }
-
-  var item = {'name': player, 'score': result}
-  window.localStorage.setItem('highscore', JSON.stringify(item))
-  /*
-  var score = []
-  score.push({name: player, time: result})
-  if (score['highscore'] !== undefined) {
-    score = JSON.parse(score['highscore'])
-  } else {
-    score = []
-  }
-  */
+  console.log(sorted)
+  var stored = sorted.slice(0, 5)
+  window.localStorage.setItem('highscore', stored)
+  // window.localStorage.removeItem('highscore')
 }
 
 function getHighScore () {
   let highscore = window.localStorage.getItem('highscore')
-  let json = JSON.parse(highscore)
+  var highscoreList = ''
   if (highscore !== null) {
-    console.log(highscore)
-    console.log(json)
-    document.getElementById('highscore').innerHTML = ''
-
-    let highscorestring = ''
-    let i = 0
-    for (var property in json) {
-      console.log(json[property])
+    let highscoreArray = highscore.split(',')
+    var sorted = []
+    var name = ''
+    var i = 0
+    for (var item in highscoreArray) {
       if (i % 2 === 0) {
-        highscorestring += json[property]
+        name = highscoreArray[item]
       } else {
-        highscorestring += ' (' + json[property] + ')<br>'
+        sorted.push([name, highscoreArray[item]])
+        highscoreList += name + ' (' + highscoreArray[item] + ')<br>'
       }
       i++
     }
 
-    document.getElementById('highscore').innerHTML += highscorestring
+    sorted.sort(function (a, b) {
+      return a[1] - b[1]
+    })
   }
+  document.getElementById('highscore').innerHTML = highscoreList
 }
 
 module.exports = {
