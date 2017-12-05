@@ -10,41 +10,41 @@
     <body>
         <h1 id="banner"></h1>
 
-     <div id="quizArea">
+        <div id="quizArea">
 
-        <div id="playerNameArea">    
-            <div id="player">
-                <h2 id="welcomePlayer">Welcome!</h2>
-                <h3>Pleace enter your name:</h3>
-                <input id="name" type="name" placeholder="  your name"/>
-                <button id="nameButton">Set name</button>
+            <div id="playerNameArea">    
+                <div id="player">
+                    <h2 id="welcomePlayer">Welcome!</h2>
+                    <h3>Pleace enter your name:</h3>
+                    <input id="name" type="name" placeholder="  your name"/>
+                    <button id="nameButton">Set name</button>
+                </div>
+                <div id="playername">
+                </div>
             </div>
-            <div id="playername">
-            </div>
-        </div>
 
-        <div  id="gameArea">
-            <button id="startGame">Start Super Quiz</button>
-            <div id="Question">
-                <p id="displayQuestion"></p>
-                <p id="displayAlternative"></p>
+            <div  id="gameArea">
+                <button id="startGame">Start Super Quiz</button>
+                <div id="Question">
+                    <p id="displayQuestion"></p>
+                    <p id="displayAlternative"></p>
+                </div>
+                <div id="answerQuestion">
+                    <h2>Your response:</h2>
+                    <input id="response" type="answer" placeholder=" your answer"/>
+                    <button id="answerButton">Answer!</button>
+                </div>
+                <p id="demo">20 Seconds remaining</p>
+                <label id="minutes">00</label>:<label id="seconds">00</label>
             </div>
-            <div id="answerQuestion">
-                <h2>Your response:</h2>
-                <input id="response" type="answer" placeholder=" your answer"/>
-                <button id="answerButton">Answer!</button>
-            </div>
-            <p id="demo">20 Seconds remaining</p>
-            <label id="minutes">00</label>:<label id="seconds">00</label>
-        </div>
 
-        <div  id="highscoreArea">
-            <div id="ranking">
-                <h3 id="highScoreHeading">High Score</h3>
-                <p id="highscore"></p>
+            <div  id="highscoreArea">
+                <div id="ranking">
+                    <h3 id="highScoreHeading">High Score</h3>
+                    <p id="highscore"></p>
+                </div>
             </div>
-        </div>
-    </div>   
+        </div>   
         <script src="build.js"></script>
 
     </body>

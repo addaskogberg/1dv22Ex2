@@ -1,3 +1,16 @@
+/**
+ * the logick for a quiz game.
+ * @module src/superQuiz
+ * @author Adda Skogberg
+ * @version 1.0.0
+ */
+
+/**
+ * When the browser is initiated.
+ * If the browser suports local storage and local storage isn't empty
+ * the name of the player is fetched and presented on the page.
+ *
+ */
 function checkDom () {
   document.addEventListener('DOMContentLoaded', function () {
     if (typeof (Storage) === 'undefined') {
@@ -9,7 +22,11 @@ function checkDom () {
     }
   })
 }
-
+/**
+ * Writes the player name from textbox to local storage at button click
+ * and displays it on the page.
+ *
+ */
 function addUserName () {
   let tag = document.querySelector('#player')
   let myHeadline = document.createElement('h2')
@@ -26,6 +43,11 @@ function addUserName () {
   })
 }
 
+/**
+ * starts the quiz on button click and calls function question inisiated with the first question URL
+ * starts the timer by initiating function myTimer
+ * starts an interval calling function setTime every second
+ */
 function startGame () {
   let button = document.querySelector('#startGame')
   button.addEventListener('click', event => {
@@ -35,16 +57,19 @@ function startGame () {
   })
 }
 
+/**
+ * gets the next question from the server and displays it on the page
+ * and if there are alternatives in the question those are displayed
+ * @param {any} nextURL
+ */
 function question (nextURL) {
   timer = 19
   const request1 = async () => {
     let response = await window.fetch(nextURL)
     let json = await response.json()
-   // console.log(json)
     let question = document.getElementById('displayQuestion')
     question.innerText = JSON.stringify(json.question)
     let alternative = document.getElementById('displayAlternative')
-    // console.log(json.nextURL)
     nextAnswer = json.nextURL
     if (json.alternatives !== undefined) {
       alternative.innerText = ''
@@ -58,6 +83,10 @@ function question (nextURL) {
   request1()
 }
 
+/**
+ * gives the player 20 seconds to answer the question and ends the game if it's not
+ *
+ */
 var timer = 19
 function myTimer () {
   setInterval(function () {
@@ -74,6 +103,9 @@ function myTimer () {
   }, 1000)
 }
 
+/**
+ * gets the total time for the game during quiz
+ */
 var minutesLabel = document.getElementById('minutes')
 var secondsLabel = document.getElementById('seconds')
 var totalSeconds = 0
@@ -81,7 +113,6 @@ function setTime () {
   ++totalSeconds
   secondsLabel.innerHTML = pad(totalSeconds % 60)
   minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60))
- // console.log(pad(totalSeconds % 60))
 }
 
 function pad (val) {
@@ -93,6 +124,12 @@ function pad (val) {
   }
 }
 
+/**
+ * takes the answer from the input field and posts it to the server
+ * when the server responds with a new URL it is passed to question
+ * if the server doesn't respond with a URL the game is won by player
+ */
+var nextAnswer = 'http://vhost3.lnu.se:20080/answer/1'
 function answer () {
   let button = document.querySelector('#answerQuestion button')
   button.addEventListener('click', event => {
@@ -105,14 +142,15 @@ function answer () {
     })
 
     var xhr = new window.XMLHttpRequest()
-
     xhr.addEventListener('readystatechange', function () {
       if (this.readyState === 4) {
-       // console.log('responseText: ' + this.responseText)
         var response = JSON.parse(this.responseText)
-        // console.log(response.nextURL)
         if (response.nextURL === undefined) {
-          gameWin()
+          if (response.message === 'Correct answer!') {
+            gameWin()
+          } else {
+            gameOver()
+          }
         } else {
           question(response.nextURL)
         }
@@ -124,8 +162,10 @@ function answer () {
     xhr.send(data)
   })
 }
-var nextAnswer = 'http://vhost3.lnu.se:20080/answer/1'
 
+/**
+ * if player fails ends the game with an alert and reloads the page
+ */
 var win = false
 async function gameOver () {
   if (!win) {
@@ -133,6 +173,11 @@ async function gameOver () {
     document.location.reload()
   }
 }
+
+/**
+ * if player wins alerts the player collects the time for highscore and initiates the highscore
+ * and reloads the page
+ */
 async function gameWin () {
   console.log(pad(pad(parseInt(totalSeconds / 60)) + totalSeconds % 60))
   let timeGameWin = pad(pad(parseInt(totalSeconds / 60)) + totalSeconds % 60)
@@ -144,6 +189,11 @@ async function gameWin () {
   document.location.reload()
 }
 
+/**
+ *collects the time for highscore and the player name places it in a highscore array in local storage
+ * sorts the player score decending
+ *
+ */
 function setHighScore () {
   let highscore = window.localStorage.getItem('highscore')
   console.log(highscore)
@@ -172,22 +222,26 @@ function setHighScore () {
   console.log(sorted)
   var stored = sorted.slice(0, 5)
   window.localStorage.setItem('highscore', stored)
-  // window.localStorage.removeItem('highscore')
+  // window.localStorage.removeItem('highscore') // clears the local storage
 }
 
+/**
+ * collects the array in local storage and converts it to something printable
+ * and displayes the updated list on the page
+ */
 function getHighScore () {
   let highscore = window.localStorage.getItem('highscore')
   var highscoreList = ''
   if (highscore !== null) {
     let highscoreArray = highscore.split(',')
-    var sorted = []
+    // var sorted = []
     var name = ''
     var i = 0
     for (var item in highscoreArray) {
       if (i % 2 === 0) {
         name = highscoreArray[item]
       } else {
-        sorted.push([name, highscoreArray[item]])
+        // sorted.push([name, highscoreArray[item]])
         highscoreList += name + ' (' + highscoreArray[item] + ')<br>'
       }
       i++
