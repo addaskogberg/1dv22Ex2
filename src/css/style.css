@@ -12,7 +12,7 @@ margin-left: 35px;
 margin-bottom: -30px;
 }
 
-#quizAre{
+#quizArea{
   width: 960px;
   height: 600px;
   border: 1px;
@@ -40,24 +40,23 @@ h3{
   font-size: 2em;
   border:2px solid #03311c;
   border-radius: 5px;
+  background-color: #e9f1e9;
 }
 
-#nameButton{
-  Height: 30px;
-  border:2px solid #03311c;
-  border-radius: 5px;
-  margin-top: 3px;
+#nameButton, #startGame{
+
+  border:5px outset #66b890;
+  margin-top: 10px;
+  font-size: 1.5em;
 }
 #playername 
 {
-  background:#6d7471;
+  background:#2C5825;
   text-align: center;
   font-size: 3em;
   color:white;
   width:280px;
-  height:50px;
   padding:3px;
-  border:2px solid #03311c;
   margin:5px 5px 5px 5px;
   border-radius: 5px;
 }
@@ -66,10 +65,32 @@ h3{
 #gameArea{
   width: 300px;
   height: 500px;
-  background-color: #a7e48f;
+  background-color: #b4c4ae;
   float:left;
   margin: 5px;
   padding: 5px;
+}
+
+#startGame
+{
+font-size: 3em;
+margin-left: 16px;
+}
+
+#Question{
+  border:1px solid #797a7a;
+  border-radius: 20px;
+  height: 170px;
+  margin-top: 20px;
+}
+#displayQuestion{
+  font-size: 1.5em;
+  margin: 5px;
+}
+#displayAlternative{
+  margin-left: 10px;
+  margin-top: 5px;
+  font-size: 1.2em;
 }
 
 #highscoreAre{
@@ -84,11 +105,3 @@ h3{
 
 
 
-#startGame
-{
-width: 150px;
-height: 150px;
-font-size: 3em;
-border: 10px outset #d8233b;
-
-}

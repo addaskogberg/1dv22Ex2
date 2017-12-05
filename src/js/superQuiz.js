@@ -62,10 +62,10 @@ var timer = 19
 function myTimer () {
   setInterval(function () {
     if (timer > 0) {
-      document.getElementById('demo').innerHTML = timer + ' sekunder kvar'
+      document.getElementById('demo').innerHTML = timer + ' Seconds remaining'
       timer--
     } else if (timer === 0) {
-      document.getElementById('demo').innerHTML = 'Tiden är ute'
+      document.getElementById('demo').innerHTML = 'Time ended'
       document.getElementById('answerButton').disabled = true
       timer--
     } else {
