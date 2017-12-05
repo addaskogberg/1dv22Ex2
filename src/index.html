@@ -8,50 +8,53 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <h1>Super Quiz</h1>
+        <h1 id="banner"></h1>
 
-        <div id="player">
-            <h4>Welcome player! Pleace enter your name.</h4>
-            <input type="name" placeholder="your name"/>
-            <button>Submit name</button>
+     <div id="quizAre">
+
+        <div id="playerNameArea">    
+            <div id="player">
+                <h2 id="welcomePlayer">Welcome player!</h2>
+                <h3>Pleace enter your name:</h3>
+                <input id="name" type="name" placeholder="  your name"/>
+                <button id="nameButton">Submit name</button>
+            </div>
+            <div id="playername">
+            </div>
         </div>
 
-        <div id="playername">
-            
+        <div  id="gameArea">
+            <button id="startGame">Start Game</button>
+            <div id="Question">
+                <p id="displayQuestion"></p>
+                <p id="displayAlternative"></p>
+            </div>
+            <div id="answerQuestion">
+                <h2>Your responce:</h2>
+                <input id="response" type="answer" placeholder="your answer"/>
+                <button id="answerButton">Submit answer</button>
+            </div>
+            <p id="demo">20 sekunder kvar</p>
+            <label id="minutes">00</label>:<label id="seconds">00</label>
         </div>
 
-        <button id="startGame">Start Game</button>
-
-        <div id="Question">
-            <p id="displayQuestion"></p>
-            <p id="displayAlternative"></p>
+        <div  id="highscoreAre">
+            <div id="ranking">
+                <h3>High Score</h3>
+                <p id="highscore"></p>
+            </div>
         </div>
+    </div>   
+        <script src="build.js"></script>
 
-      
+    </body>
+</html>
 
-        <div id="answerQuestion">
-            <h2>Your responce:</h2>
-            <input id="response" type="answer" placeholder="your answer"/>
-            <button id="answerButton">Submit answer</button>
-  
-        </div>
-      
-        <p id="demo">20 sekunder kvar</p>
-        <label id="minutes">00</label>:<label id="seconds">00</label>
 
-        <div id="ranking">
-            <h3>High Score</h3>
-            <p id="highscore"></p>
-        </div>
-
-        <h3>Att göra</h3>
-        <ul>    
- 
-            <li>UI ska vaara enkelt och vackert</li>
-        </ul>
-
-     <!--   <h3>Klar</h3>
+   <!--   <h3>Klar</h3>
         <ul> 
+            
+            <li>UI ska vaara enkelt och vackert</li>
             <li>användare ska kunna lägga till sitt namn</li> 
             <li>Glöm inte att ändra localhost till 4000</li>
             <li>användare ska kunna svara på frågan från servern</li>
@@ -66,7 +69,3 @@
             https://www.youtube.com/watch?v=82hnvUYY6QA
         </ul>
      -->   
-        <script src="build.js"></script>
-
-    </body>
-</html>

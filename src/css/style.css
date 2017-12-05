@@ -1,26 +1,94 @@
 body
 {
-  background-color: #b6afaf
+  background-color: #b6afaf;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+#banner{
+background-image: url("QuizBanner2.jpg");
+background-repeat: no-repeat;
+width: 960px;
+height: 210px;
+margin-left: 35px;
+margin-bottom: -30px;
 }
 
+#quizAre{
+  width: 960px;
+  height: 600px;
+  border: 1px;
+  padding: 20px;
+}
+#playerNameArea{
+  width: 300px;
+  height: 500px;
+  float: left;
+  background-color: #ebd7d770;
+  margin: 5px;
+  padding: 5px;
+}
+#welcomePlayer{
+  font-size: 2em;
+  text-align: center;
+}
+h3{
+  margin: 5px;
+}
+
+#name{
+  width: 200px;
+  Height: 30px;
+  font-size: 2em;
+  border:2px solid #03311c;
+  border-radius: 5px;
+}
+
+#nameButton{
+  Height: 30px;
+  border:2px solid #03311c;
+  border-radius: 5px;
+  margin-top: 3px;
+}
 #playername 
 {
-  background:#295c4b;
+  background:#6d7471;
   text-align: center;
   font-size: 3em;
   color:white;
-  width:200px;
+  width:280px;
   height:50px;
   padding:3px;
   border:2px solid #03311c;
-  margin:10px 10px 50px 10px;
-  border-radius: 3px;
+  margin:5px 5px 5px 5px;
+  border-radius: 5px;
 }
+
+
+#gameArea{
+  width: 300px;
+  height: 500px;
+  background-color: #a7e48f;
+  float:left;
+  margin: 5px;
+  padding: 5px;
+}
+
+#highscoreAre{
+  width: 300px;
+  height: 500px;
+  float: right;
+  background-color: #8fbee4;
+  margin: 5px;
+  padding: 5px;
+}
+
+
+
 
 #startGame
 {
 width: 150px;
 height: 150px;
 font-size: 3em;
-border: 4px solid #03311c;
+border: 10px outset #d8233b;
+
 }
