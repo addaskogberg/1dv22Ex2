@@ -1,5 +1,5 @@
 /**
- * the logick for a quiz game.
+ * the logic for a quiz game.
  * @module src/superQuiz
  * @author Adda Skogberg
  * @version 1.0.0
@@ -180,10 +180,9 @@ async function gameOver () {
  * and reloads the page
  */
 async function gameWin () {
- // console.log(pad(pad(parseInt(totalSeconds / 60)) + totalSeconds % 60))
-  let timeGameWin = pad(pad(parseInt(totalSeconds / 60)) + totalSeconds % 60)
-  if (timeGameWin.length === 0) return
-  window.localStorage.setItem('valueTime', timeGameWin)
+ // let timeGameWin = pad(pad(parseInt(totalSeconds / 60)) + '.' + totalSeconds % 60)
+  // if (timeGameWin.length === 0) return
+  window.localStorage.setItem('valueTime', totalSeconds)
   await window.alert('you win')
   setHighScore()
   win = true
@@ -241,7 +240,10 @@ function getHighScore () {
       if (i % 2 === 0) {
         name = highscoreArray[item]
       } else {
-        highscoreList += name + ' (' + highscoreArray[item] + ')<br>'
+        let seconds = pad(highscoreArray[item] % 60)
+        let minutes = pad(parseInt(highscoreArray[item] / 60))
+        highscoreList += name + ' (' + minutes + ':' + seconds + ')<br>'
+        // highscoreList += name + ' (' + highscoreArray[item] + ')<br>'
       }
       i++
     }
