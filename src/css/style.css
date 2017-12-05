@@ -1,6 +1,6 @@
 body
 {
-  background-color: #b6afaf;
+  background-color: #2C5825;
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 #banner{
@@ -8,8 +8,8 @@ background-image: url("QuizBanner2.jpg");
 background-repeat: no-repeat;
 width: 960px;
 height: 210px;
-margin-left: 35px;
-margin-bottom: -30px;
+margin-left: 20px;
+margin-bottom: -26px;
 }
 
 #quizArea{
@@ -17,14 +17,16 @@ margin-bottom: -30px;
   height: 600px;
   border: 1px;
   padding: 20px;
+
 }
 #playerNameArea{
   width: 300px;
   height: 500px;
   float: left;
-  background-color: #ebd7d770;
+  background-color: #b4c4ae;
   margin: 5px;
   padding: 5px;
+  margin-left: 0px;
 }
 #welcomePlayer{
   font-size: 2em;
@@ -34,20 +36,23 @@ h3{
   margin: 5px;
 }
 
-#name{
+#name, #response{
   width: 200px;
   Height: 30px;
   font-size: 2em;
   border:2px solid #03311c;
   border-radius: 5px;
   background-color: #e9f1e9;
+  padding: 5px;
 }
 
-#nameButton, #startGame{
+#nameButton, #startGame, #answerButton{
 
   border:5px outset #66b890;
   margin-top: 10px;
   font-size: 1.5em;
+  border-radius: 10px;
+  padding: 5px;
 }
 #playername 
 {
@@ -63,12 +68,17 @@ h3{
 
 
 #gameArea{
-  width: 300px;
+  width: 608px;
   height: 500px;
   background-color: #b4c4ae;
   float:left;
   margin: 5px;
   padding: 5px;
+  margin-right: 0px;
+}
+
+#gameArea h2{
+  margin-bottom: 0px;
 }
 
 #startGame
@@ -79,8 +89,8 @@ margin-left: 16px;
 
 #Question{
   border:1px solid #797a7a;
-  border-radius: 20px;
-  height: 170px;
+  border-radius: 10px;
+  height: 190px;
   margin-top: 20px;
 }
 #displayQuestion{
@@ -90,16 +100,34 @@ margin-left: 16px;
 #displayAlternative{
   margin-left: 10px;
   margin-top: 5px;
-  font-size: 1.2em;
+  font-size: 1.0em;
 }
 
-#highscoreAre{
-  width: 300px;
-  height: 500px;
-  float: right;
-  background-color: #8fbee4;
+#answerButton{
+margin-left: 5px;
+}
+
+#highscoreArea{
+  width: 920px;
+  height: 150px;
+  float: left;
+  background-color: #2C5825;
+  color:white;
   margin: 5px;
   padding: 5px;
+}
+
+#highScoreHeading{
+  margin:0px;
+  font-size: 1.5em;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+#highscore{
+  margin:0px;
+  font-size: 1em;
+  margin-right: 10px;
+  
 }
 
 
