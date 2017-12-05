@@ -30,7 +30,6 @@ margin-bottom: -26px;
 }
 #welcomePlayer{
   font-size: 2em;
-  text-align: center;
 }
 h3{
   margin: 5px;
@@ -38,7 +37,6 @@ h3{
 
 #name, #response{
   width: 200px;
-  Height: 30px;
   font-size: 2em;
   border:2px solid #03311c;
   border-radius: 5px;

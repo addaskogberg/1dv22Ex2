@@ -13,7 +13,7 @@ function checkDom () {
 function addUserName () {
   let tag = document.querySelector('#player')
   let myHeadline = document.createElement('h2')
-  myHeadline.innerText = 'The players name is:'
+  myHeadline.innerText = 'Curently playing:'
   tag.appendChild(myHeadline)
   let button = document.querySelector('#player button')
   button.addEventListener('click', event => {
