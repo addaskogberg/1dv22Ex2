@@ -127,7 +127,8 @@ function pad (val) {
 /**
  * takes the answer from the input field and posts it to the server
  * when the server responds with a new URL it is passed to question
- * if the server doesn't respond with a URL the game is won by player
+ * if the server doesn't respond with a URL the, game is won by player
+ * or answer is wrong, and the game ends
  */
 var nextAnswer = 'http://vhost3.lnu.se:20080/answer/1'
 function answer () {
@@ -179,7 +180,7 @@ async function gameOver () {
  * and reloads the page
  */
 async function gameWin () {
-  console.log(pad(pad(parseInt(totalSeconds / 60)) + totalSeconds % 60))
+ // console.log(pad(pad(parseInt(totalSeconds / 60)) + totalSeconds % 60))
   let timeGameWin = pad(pad(parseInt(totalSeconds / 60)) + totalSeconds % 60)
   if (timeGameWin.length === 0) return
   window.localStorage.setItem('valueTime', timeGameWin)
@@ -234,14 +235,12 @@ function getHighScore () {
   var highscoreList = ''
   if (highscore !== null) {
     let highscoreArray = highscore.split(',')
-    // var sorted = []
     var name = ''
     var i = 0
     for (var item in highscoreArray) {
       if (i % 2 === 0) {
         name = highscoreArray[item]
       } else {
-        // sorted.push([name, highscoreArray[item]])
         highscoreList += name + ' (' + highscoreArray[item] + ')<br>'
       }
       i++
