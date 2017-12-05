@@ -114,7 +114,12 @@ function setTime () {
   secondsLabel.innerHTML = pad(totalSeconds % 60)
   minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60))
 }
-
+/**
+ * formats the string to two digits
+ *
+ * @param {any} val
+ * @returns valstring
+ */
 function pad (val) {
   var valString = val + ''
   if (valString.length < 2) {
@@ -180,8 +185,6 @@ async function gameOver () {
  * and reloads the page
  */
 async function gameWin () {
- // let timeGameWin = pad(pad(parseInt(totalSeconds / 60)) + '.' + totalSeconds % 60)
-  // if (timeGameWin.length === 0) return
   window.localStorage.setItem('valueTime', totalSeconds)
   await window.alert('you win')
   setHighScore()
@@ -214,7 +217,6 @@ function setHighScore () {
   var player = window.localStorage.getItem('value')
   var result = window.localStorage.getItem('valueTime')
   sorted.push([player, result])
-
   sorted.sort(function (a, b) {
     return a[1] - b[1]
   })
@@ -243,7 +245,6 @@ function getHighScore () {
         let seconds = pad(highscoreArray[item] % 60)
         let minutes = pad(parseInt(highscoreArray[item] / 60))
         highscoreList += name + ' (' + minutes + ':' + seconds + ')<br>'
-        // highscoreList += name + ' (' + highscoreArray[item] + ')<br>'
       }
       i++
     }
